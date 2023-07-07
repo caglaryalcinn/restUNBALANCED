@@ -1,0 +1,20 @@
+a <- data %>% select_if(is.integer)
+b <- data %>% select_if(is.factor)
+c<- scale(a)
+scaled_data <- cbind(c,b)
+q2 <- b %>% select(-legendary)
+dummy <- dummyVars(" ~ .", data=q2)
+final_df <- data.frame(predict(dummy, newdata=q2))
+encoding_scaled <- cbind(c,final_df)
+encoding<- cbind(a,final_df)
+t <-as.data.frame(data$legendary)
+encoding_data_scaled <- cbind(encoding_scaled,t)
+encoding_data <- cbind(encoding,t)
+str(encoding_data)
+colnames(encoding_data_scaled)[51] <- "legendary"
+colnames(encoding_data)[51] <- "legendary"
+str(scaled_data)
+str(encoding_data)
+str(encoding_data_scaled)
+str(data)
+
